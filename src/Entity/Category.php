@@ -1,0 +1,75 @@
+<?php
+
+namespace App\Entity;
+
+use App\Repository\CategoryRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\ORM\Mapping as ORM;
+
+#[ORM\Entity(repositoryClass: CategoryRepository::class)]
+class Category
+{
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column]
+    private ?int $id = null;
+
+    #[ORM\Column(length: 255)]
+    private ?string $name = null;
+
+    #[ORM\OneToMany(mappedBy: 'category', targetEntity: PokeBall::class)]
+    private Collection $pokeBalls;
+
+    public function __construct()
+    {
+        $this->pokeBalls = new ArrayCollection();
+    }
+
+    public function getId(): ?int
+    {
+        return $this->id;
+    }
+
+    public function getName(): ?string
+    {
+        return $this->name;
+    }
+
+    public function setName(string $name): static
+    {
+        $this->name = $name;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, PokeBall>
+     */
+    public function getPokeBalls(): Collection
+    {
+        return $this->pokeBalls;
+    }
+
+    public function addPokeBall(PokeBall $pokeBall): static
+    {
+        if (!$this->pokeBalls->contains($pokeBall)) {
+            $this->pokeBalls->add($pokeBall);
+            $pokeBall->setCategory($this);
+        }
+
+        return $this;
+    }
+
+    public function removePokeBall(PokeBall $pokeBall): static
+    {
+        if ($this->pokeBalls->removeElement($pokeBall)) {
+            // set the owning side to null (unless already changed)
+            if ($pokeBall->getCategory() === $this) {
+                $pokeBall->setCategory(null);
+            }
+        }
+
+        return $this;
+    }
+}
