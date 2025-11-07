@@ -43,9 +43,6 @@ class Category
         return $this;
     }
 
-    /**
-     * @return Collection<int, PokeBall>
-     */
     public function getPokeBalls(): Collection
     {
         return $this->pokeBalls;
@@ -64,7 +61,6 @@ class Category
     public function removePokeBall(PokeBall $pokeBall): static
     {
         if ($this->pokeBalls->removeElement($pokeBall)) {
-            // set the owning side to null (unless already changed)
             if ($pokeBall->getCategory() === $this) {
                 $pokeBall->setCategory(null);
             }

@@ -16,7 +16,7 @@ class Image
     #[ORM\Column(length: 255)]
     private ?string $url = null;
 
-    #[ORM\ManyToOne(inversedBy: 'images')]
+    #[ORM\OneToOne(inversedBy: 'images')]
     private ?PokeBall $pokeBall = null;
 
     public function getId(): ?int

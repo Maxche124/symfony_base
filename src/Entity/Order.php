@@ -93,9 +93,6 @@ class Order
         return $this;
     }
 
-    /**
-     * @return Collection<int, OrderItem>
-     */
     public function getOrderItems(): Collection
     {
         return $this->orderItems;
@@ -114,7 +111,6 @@ class Order
     public function removeOrderItem(OrderItem $orderItem): static
     {
         if ($this->orderItems->removeElement($orderItem)) {
-            // set the owning side to null (unless already changed)
             if ($orderItem->getUserOrder() === $this) {
                 $orderItem->setUserOrder(null);
             }

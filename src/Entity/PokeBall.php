@@ -139,9 +139,6 @@ class PokeBall
         return $this;
     }
 
-    /**
-     * @return Collection<int, OrderItem>
-     */
     public function getOrderItems(): Collection
     {
         return $this->orderItems;
@@ -160,7 +157,6 @@ class PokeBall
     public function removeOrderItem(OrderItem $orderItem): static
     {
         if ($this->orderItems->removeElement($orderItem)) {
-            // set the owning side to null (unless already changed)
             if ($orderItem->getPokeBall() === $this) {
                 $orderItem->setPokeBall(null);
             }
@@ -169,9 +165,6 @@ class PokeBall
         return $this;
     }
 
-    /**
-     * @return Collection<int, Image>
-     */
     public function getImages(): Collection
     {
         return $this->images;
@@ -190,7 +183,6 @@ class PokeBall
     public function removeImage(Image $image): static
     {
         if ($this->images->removeElement($image)) {
-            // set the owning side to null (unless already changed)
             if ($image->getPokeBall() === $this) {
                 $image->setPokeBall(null);
             }
