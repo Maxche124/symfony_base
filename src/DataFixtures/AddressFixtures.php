@@ -3,6 +3,7 @@
 namespace App\DataFixtures;
 
 use App\Entity\Address;
+use App\Entity\User;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
@@ -16,11 +17,15 @@ class AddressFixtures extends Fixture implements DependentFixtureInterface
 
         for ($i = 0; $i < 20; $i++) {
             $address = new Address();
-            $address->setStreet($faker->streetAddress);
-            $address->setCity($faker->city);
-            $address->setPostalCode($faker->postcode);
-            $address->setCountry($faker->country);
-            $address->setUser($this->getReference('user_' . $faker->numberBetween(0, 9)));
+            $address->setStreet($faker->streetAddress());
+            $address->setCity($faker->city());
+            $address->setPostalCode($faker->postcode());
+            $address->setCountry($faker->country());
+
+            /** @var User $user */
+            $user = $this->getReference('user_' . $faker->numberBetween(0, 9), User::class);
+            $address->setUser($user);
+
             $manager->persist($address);
             $this->addReference('address_' . $i, $address);
         }

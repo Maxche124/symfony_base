@@ -24,6 +24,14 @@ class Order
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface $createdAt = null;
 
+    #[ORM\ManyToOne]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Address $shippingAddress = null;
+
+    #[ORM\ManyToOne]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Address $billingAddress = null;
+
     #[ORM\Column(length: 255, enumType: OrderStatus::class)]
     private ?OrderStatus $status = null;
 
@@ -96,6 +104,28 @@ class Order
     public function getOrderItems(): Collection
     {
         return $this->orderItems;
+    }
+
+    public function getShippingAddress(): ?Address
+    {
+        return $this->shippingAddress;
+    }
+
+    public function setShippingAddress(Address $shippingAddress): static
+    {
+        $this->shippingAddress = $shippingAddress;
+        return $this;
+    }
+
+    public function getBillingAddress(): ?Address
+    {
+        return $this->billingAddress;
+    }
+
+    public function setBillingAddress(Address $billingAddress): static
+    {
+        $this->billingAddress = $billingAddress;
+        return $this;
     }
 
     public function addOrderItem(OrderItem $orderItem): static

@@ -8,9 +8,11 @@ use Doctrine\Persistence\ObjectManager;
 
 class CategoryFixtures extends Fixture
 {
+    public const CATEGORIES = ['Common', 'Uncommon', 'Rare', 'Epic', 'Legendary'];
+
     public function load(ObjectManager $manager): void
     {
-        foreach (['Common', 'Uncommon', 'Rare', 'Epic', 'Legendary'] as $i => $name) {
+        foreach (self::CATEGORIES as $i => $name) {
             $category = new Category();
             $category->setName($name);
             $manager->persist($category);
