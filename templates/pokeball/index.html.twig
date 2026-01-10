@@ -1,10 +1,10 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Pokéballs for Sale{% endblock %}
+{% block title %}{% trans %}home.title{% endtrans %}{% endblock %}
 
 {% block body %}
     <div class="container">
-        <h1>Pokéballs for Sale</h1>
+        <h1>{% trans %}home.title{% endtrans %}</h1>
 
         <div class="row">
             {% for pokeBall in pokeBalls %}
@@ -13,9 +13,9 @@
                         <div class="card-body">
                             <h5 class="card-title">{{ pokeBall.name }}</h5>
                             <p class="card-text">{{ pokeBall.description }}</p>
-                            <p class="card-text">Price: ${{ pokeBall.price }}</p>
-                            <p class="card-text">Stock: {{ pokeBall.stock }}</p>
-                            <a href="#" class="btn btn-primary">Add to Cart</a>
+                            <p class="card-text">{% trans %}product.price{% endtrans %}: {% if app.request.locale == 'fr' %}{{ pokeBall.price }} €{% else %}${{ pokeBall.price }}{% endif %}</p>
+                            <p class="card-text">{% trans %}product.stock{% endtrans %}: {{ pokeBall.stock }}</p>
+                            <a href="#" class="btn btn-primary">{% trans %}product.add_to_cart{% endtrans %}</a>
                         </div>
                     </div>
                 </div>

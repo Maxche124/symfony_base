@@ -1,3 +1,14 @@
 controllers:
     resource: ../src/Controller/
     type: attribute
+    prefix: '/{_locale}'
+    requirements:
+        _locale: 'en|fr'
+
+root_redirect:
+    path: /
+    controller: Symfony\Bundle\FrameworkBundle\Controller\RedirectController
+    defaults:
+        route: app_pokeball_index
+        _locale: en
+        permanent: true
