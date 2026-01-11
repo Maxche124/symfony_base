@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New PokeBall{% endblock %}
+
+{% block body %}
+    <h1>Create new PokeBall</h1>
+
+    {{ include('admin/pokeball/_form.html.twig') }}
+
+    <a href="{{ path('app_poke_ball_index') }}">back to list</a>
+{% endblock %}

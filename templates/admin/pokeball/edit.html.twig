@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit PokeBall{% endblock %}
+
+{% block body %}
+    <h1>Edit PokeBall</h1>
+
+    {{ include('admin/pokeball/_form.html.twig', {'button_label': 'Update'}) }}
+
+    {{ include('admin/pokeball/_delete_form.html.twig') }}
+
+    <a href="{{ path('app_poke_ball_index') }}">back to list</a>
+{% endblock %}

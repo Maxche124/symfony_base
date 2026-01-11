@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ poke_ball.name }}{% endblock %}
+
+{% block body %}
+    <h1>{{ poke_ball.name }}</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ poke_ball.id }}</td>
+            </tr>
+            <tr>
+                <th>Name</th>
+                <td>{{ poke_ball.name }}</td>
+            </tr>
+            <tr>
+                <th>Price</th>
+                <td>{{ poke_ball.price }}</td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>{{ poke_ball.description }}</td>
+            </tr>
+            <tr>
+                <th>Stock</th>
+                <td>{{ poke_ball.stock }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_poke_ball_index') }}">back to list</a>
+
+    <a href="{{ path('admin_pokeball_edit', {'id': poke_ball.id}) }}">edit</a>
+
+{% endblock %}

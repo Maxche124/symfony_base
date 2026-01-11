@@ -2,9 +2,14 @@
 
 {% block title %}{% trans %}home.title{% endtrans %}{% endblock %}
 
+
 {% block body %}
     <div class="container">
         <h1>{% trans %}home.title{% endtrans %}</h1>
+
+        {% if is_granted('ROLE_ADMIN') %}
+            <a href="{{ path('admin_pokeball_new') }}" class="btn btn-success">Create new PokeBall</a>
+        {% endif %}
 
         <div class="row">
             {% for pokeBall in pokeBalls %}
@@ -15,7 +20,12 @@
                             <p class="card-text">{{ pokeBall.description }}</p>
                             <p class="card-text">{% trans %}product.price{% endtrans %}: {% if app.request.locale == 'fr' %}{{ pokeBall.price }} €{% else %}${{ pokeBall.price }}{% endif %}</p>
                             <p class="card-text">{% trans %}product.stock{% endtrans %}: {{ pokeBall.stock }}</p>
+                            <a href="{{ path('admin_pokeball_show', {'id': pokeBall.id}) }}" class="btn btn-primary">{% trans %}product.view_details{% endtrans %}</a>
                             <a href="#" class="btn btn-primary">{% trans %}product.add_to_cart{% endtrans %}</a>
+                            {% if is_granted('ROLE_ADMIN') %}
+                                <a href="{{ path('admin_pokeball_edit', {'id': pokeBall.id}) }}" class="btn btn-secondary">{% trans %}product.edit{% endtrans %}</a>
+                                {{ include('admin/pokeball/_delete_form.html.twig') }}
+                            {% endif %}
                         </div>
                     </div>
                 </div>

@@ -2,3 +2,6 @@ home.title: Pokéball Shop
 product.price: Price
 product.stock: Stock
 product.add_to_cart: Add to cart
+product.view_details: View details
+product.edit: Edit
+product.delete: Delete
