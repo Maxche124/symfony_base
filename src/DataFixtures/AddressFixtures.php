@@ -15,7 +15,7 @@ class AddressFixtures extends Fixture implements DependentFixtureInterface
     {
         $faker = Factory::create('fr_FR');
 
-        for ($i = 0; $i < 20; $i++) {
+        for ($i = 0; $i < 20; ++$i) {
             $address = new Address();
             $address->setStreet($faker->streetAddress());
             $address->setCity($faker->city());
@@ -23,11 +23,11 @@ class AddressFixtures extends Fixture implements DependentFixtureInterface
             $address->setCountry($faker->country());
 
             /** @var User $user */
-            $user = $this->getReference('user_' . $faker->numberBetween(0, 9), User::class);
+            $user = $this->getReference('user_'.$faker->numberBetween(0, 9), User::class);
             $address->setUser($user);
 
             $manager->persist($address);
-            $this->addReference('address_' . $i, $address);
+            $this->addReference('address_'.$i, $address);
         }
 
         $manager->flush();

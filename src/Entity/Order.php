@@ -114,6 +114,7 @@ class Order
     public function setShippingAddress(Address $shippingAddress): static
     {
         $this->shippingAddress = $shippingAddress;
+
         return $this;
     }
 
@@ -125,6 +126,7 @@ class Order
     public function setBillingAddress(Address $billingAddress): static
     {
         $this->billingAddress = $billingAddress;
+
         return $this;
     }
 

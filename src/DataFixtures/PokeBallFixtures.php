@@ -2,9 +2,9 @@
 
 namespace App\DataFixtures;
 
-use App\Entity\PokeBall;
-use App\Entity\Enum\PokeBallStatus;
 use App\Entity\Category;
+use App\Entity\Enum\PokeBallStatus;
+use App\Entity\PokeBall;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
@@ -28,10 +28,10 @@ class PokeBallFixtures extends Fixture implements DependentFixtureInterface
             $pokeBall->setStatus(PokeBallStatus::cases()[$faker->numberBetween(0, count(PokeBallStatus::cases()) - 1)]);
             $pokeBall->setTauxCapture($faker->randomFloat(2, 1, 10));
 
-            $category = $this->getReference('category_' . $faker->numberBetween(0, $categoryCount - 1), Category::class);
+            $category = $this->getReference('category_'.$faker->numberBetween(0, $categoryCount - 1), Category::class);
             $pokeBall->setCategory($category);
-            
-            $this->addReference('pokeBall_' . $i, $pokeBall);
+
+            $this->addReference('pokeBall_'.$i, $pokeBall);
 
             $manager->persist($pokeBall);
         }
